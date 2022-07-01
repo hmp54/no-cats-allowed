@@ -6,7 +6,7 @@ const Stories = () => {
 
   return (
     <View>
-        <View style = {{marginBottom: 13}}>
+        <View>
             <ScrollView 
                 horizontal 
                 showsHorizontalScrollIndicator = {false}
@@ -22,7 +22,7 @@ const Stories = () => {
                    </View>
                 })}
             </ScrollView>
-        <Text style = {{color:'white'}}>Stories</Text>
+        <Text style = {{color:'white'}}></Text>
       </View>
     </View>
   )
@@ -36,11 +36,7 @@ const styles = StyleSheet.create({
         marginRight: 8, 
         borderWidth: 3,
         borderColor: 'lime',
-    },
-    storyText: {
-        
     }
-    
 })
 
 

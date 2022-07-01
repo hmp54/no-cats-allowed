@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
 
 const Header = () => {
     return(
@@ -9,8 +9,7 @@ const Header = () => {
                     style = {styles.logo} 
                     source = {require('../../assets/logo.png')}
                 />
-            </TouchableOpacity>
-
+            </TouchableOpacity> 
             <View style={styles.iconsContainer}>
                 <TouchableOpacity>
                     <Image
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     }, 
     logo:{
         width: 200,
-        height: 100,
+        height: 70,
         resizeMode: 'contain'
     },
     iconsContainer:{
@@ -76,4 +75,4 @@ const styles = StyleSheet.create({
         color:'white'
     }
 })
-export default Header; 
+export default Header
