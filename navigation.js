@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from './screens/HomeScreen'
 import NewPostScreen from './screens/NewPostScreen'
 import LoginScreen from './screens/LoginScreen'
+import SignupScreen from './screens/SignupScreen'
 
 {/* This code basically creates a stack of different screens, like the HomeScreen and New Post Screen, and allows up to pass all of them through our App.js as one piece (hence the name Stack) 
 
@@ -20,13 +21,13 @@ const screenOptions = {
 const SignedInStack = () =>( 
     <NavigationContainer>
         <Stack.Navigator 
-            initialRouteName = 'LoginScreen' 
+            initialRouteName = 'SignupScreen' 
             screenOptions = {screenOptions}
         >
             <Stack.Screen name = 'HomeScreen' component={HomeScreen}/>
             <Stack.Screen name = 'NewPostScreen' component = {NewPostScreen}/>
             <Stack.Screen name = 'LoginScreen' component = {LoginScreen}/>
-
+            <Stack.Screen name = 'SignupScreen' component = {SignupScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
 )

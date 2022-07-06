@@ -1,19 +1,18 @@
 import { View, Text, StyleSheet, Image, SafeAreaView } from 'react-native'
 import React from 'react'
 import LoginForm from '../components/loginScreen/LoginForm'
+import SignupForm from '../components/signupScreen/signupForm'
 
 const BIG_LOGO = require('../assets/no-pets.png')
 const LOGO = require('../assets/logo.png')
 
-const LoginScreen = ({navigation}) => (
+const SignupScreen = ({navigation}) => (
     <View style = {styles.container}>
         <View style = {styles.logoContainer}>
             <Image source = {BIG_LOGO} style = {styles.bigLogo}/> 
             <Image source = {LOGO} style = {styles.logo}/>
         </View>
-
-        <LoginForm navigation = {navigation}/>
-
+        <SignupForm navigation = {navigation}/>
     </View>
 )
 
@@ -38,4 +37,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginScreen
+export default SignupScreen

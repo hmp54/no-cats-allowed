@@ -5,22 +5,21 @@ import * as Yup from 'yup'
 import Validator from 'email-validator'
 
 
-const LoginForm = ({navigation}) => {
-    const LoginFormSchema = Yup.object().shape({
+const SignupForm = ({navigation}) => {
+    const signupFormSchema = Yup.object().shape({
         email: Yup.string().email().required('An email is required'), 
-        password: Yup.string()
-            .required()
-            .min(8, 'Your password has to be at least 8 characters')
+        username: Yup.string().required().min(2, 'A username is required'),
+        password: Yup.string().required().min(8, 'Your password has to be at least 8 characters')
     })
 
   return (
     <View style = {styles.wrapper}>
         <Formik 
-            initialValues={{email: '', password: ''}}
+            initialValues={{email: '', username: '', password: ''}}
             onSubmit={values => {
                 console.log(values)
             }}
-            validationSchema={LoginFormSchema}
+            validationSchema={signupFormSchema}
             validationOnMount={true}
         >
             {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
@@ -32,7 +31,7 @@ const LoginForm = ({navigation}) => {
                 ]}>
                     <TextInput
                         placeholderTextColor = "#555"
-                        placeholder = 'Phone number, username or email'
+                        placeholder = 'Email'
                         autoCapitalize = 'none'
                         keyboardType = 'email-address'
                         textContextType = 'emailAddress'
@@ -41,6 +40,23 @@ const LoginForm = ({navigation}) => {
                         onChangeText = {handleChange('email')}
                         onBlur = {handleBlur('email')}
                         value = {values.email}
+                        />
+                </View>
+                <View style = {[styles.inputField, 
+                    {borderColor: values.username.length < 1 || values.username.length > 6
+                        ? '#444' 
+                        : '#ff3237'}
+                ]}>
+                    <TextInput
+                        placeholderTextColor = "#555"
+                        placeholder = 'Username'
+                        autoCapitalize = 'none'
+                        textContextType = 'username'
+                        autoFocus = {true}
+                        style = {{color: 'white'}}
+                        onChangeText = {handleChange('username')}
+                        onBlur = {handleBlur('username')}
+                        value = {values.username}
                         />
                 </View>
                 <View style = {[styles.inputField, { 
@@ -61,23 +77,19 @@ const LoginForm = ({navigation}) => {
                         value = {values.password}
                     />
                 </View>
-                <View style = {{width: '90%', alignItems: 'flex-end', marginBottom: 30}}>
-                    <Text style = {{color: '#20c9ff'}}>Forgot password?</Text>
-                </View>
 
                 <Pressable 
                     titleSize = {20}   
                     style = {styles.button(isValid)} 
-                    onPress = {handleSubmit}
-                    
+                    onPress = {handleSubmit} 
                 >
-                    <Text style={{color: 'white'}}>Log In</Text>
+                    <Text style={{color: 'white'}}>Sign Up</Text>
                 </Pressable>
 
                 <View style = {styles.signupContainer}>
-                    <Text style = {{color: 'white'}}>Don't have an account? </Text>
-                    <TouchableOpacity onPress = {() => navigation.goBack()}>
-                        <Text style = {{color: '#20c9ff'}}>Sign up</Text>
+                    <Text style = {{color: 'white'}}>Already have an account? </Text>
+                    <TouchableOpacity onPress = {() => navigation.push('LoginScreen')}>
+                        <Text style = {{color: '#20c9ff'}}>Log in</Text>
                     </TouchableOpacity>
                 </View>
                 </>
@@ -108,7 +120,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         minHeight: 38,
         borderRadius: 4,
-        width: '90%'
+        width: '90%',
+        marginTop: 30
     }),
     signupContainer: {
         flexDirection: 'row', 
@@ -116,4 +129,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginForm
+export default SignupForm
