@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { firebase } from '../../firebase'
+import { firebase, db } from '../../firebase'
 
 
 const LoginForm = ({navigation}) => {

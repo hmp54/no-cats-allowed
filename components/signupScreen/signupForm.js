@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import Validator from 'email-validator'
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { firebase, db } from '../../firebase'
+import {collection, addDoc} from 'firebase/firestore'
 
 const SignupForm = ({navigation}) => {
     const signupFormSchema = Yup.object().shape({
@@ -13,16 +14,32 @@ const SignupForm = ({navigation}) => {
         password: Yup.string().required().min(8, 'Your password has to be at least 8 characters')
     })
 
+    const getProfilePhoto = () =>{
+        return require('../../assets/profile-photos/charles.png')
+    }
+
     const auth = getAuth(); 
+
     const onSignUp = (email, username, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user; 
-            console.log("Created account", email, username, password)
-        })
-        .catch((error) =>{
+        const authUser = createUserWithEmailAndPassword(auth, email, password);
+        try{
+            ((userCredential) => {
+                const user = userCredential.user; 
+                console.log("Created account", email, username, password)
+
+                //when user signs up, add them to our users collection
+                const colRef = collection(db, 'users')
+                addDoc(colRef, {
+                    owner_uid: authUser.user.uid,
+                    username: username,
+                    email: authUser.user.email,
+                    profile_picture: getProfilePhoto()
+                })
+            })
+        }
+        catch{(error) =>{
             Alert.alert(error.message)    
-        })
+        }}
     }
 
     return (
