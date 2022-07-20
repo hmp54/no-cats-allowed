@@ -17,11 +17,11 @@ const LoginForm = ({navigation}) => {
     })
 
     const auth = getAuth(firebase);
-   const onLogin = (email, password) =>{
-        signInWithEmailAndPassword(auth, email, password)
+    const onLogin = async (email, password) =>{
+        await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user
-            console.log('Firebase login successful', email, password)
+            Alert.alert('Firebase login successful', email, password)
         }).catch((error) =>{
             Alert.alert(error.message)
         });

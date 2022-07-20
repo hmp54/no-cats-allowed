@@ -1,5 +1,4 @@
 import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity, Alert } from 'react-native'
-import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
@@ -14,32 +13,33 @@ const SignupForm = ({navigation}) => {
         password: Yup.string().required().min(8, 'Your password has to be at least 8 characters')
     })
 
-    const getProfilePhoto = () =>{
-        return require('../../assets/profile-photos/charles.png')
+    const placeholderPhoto = () =>{
+        return '../../assets/profile-photos/profilePlaceholder.png'
     }
 
-    const auth = getAuth(); 
-
-    const onSignUp = (email, username, password) => {
-        const authUser = createUserWithEmailAndPassword(auth, email, password);
-        try{
-            ((userCredential) => {
+    const onSignUp = async (email, username, password) => {
+        const auth = getAuth(); 
+        const authUser = await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                //signed in
                 const user = userCredential.user; 
-                console.log("Created account", email, username, password)
+                console.log("🔥 Created account", email, username, password);
 
-                //when user signs up, add them to our users collection
+                //when user signs up, add thir username to 'users' collection on firestore
                 const colRef = collection(db, 'users')
                 addDoc(colRef, {
-                    owner_uid: authUser.user.uid,
+                    owner_uid: user.uid,
                     username: username,
-                    email: authUser.user.email,
-                    profile_picture: getProfilePhoto()
+                    email: user.email,
+                    profile_picture: placeholderPhoto(),
+                    followerCount: 0,
+                    following: 0,
+                    posts: 0
                 })
             })
-        }
-        catch{(error) =>{
-            Alert.alert(error.message)    
-        }}
+            .catch((error) =>{
+                Alert.alert(error.message)
+            })
     }
 
     return (
