@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, ActionSheetIOS, Alert } from 'react-native'
 import React from 'react'
-import {getAuth, signOut} from 'firebase/auth'
-
+import {signOut} from 'firebase/auth'
+import {auth} from '../../firebase'
 
 const ProfileHeader = () => {
   return (
@@ -13,6 +13,7 @@ const ProfileHeader = () => {
 
 
 const Header = () => {
+    const user = auth.currentUser
     return(
     <View style = {styles.headerContainer}>
         <TouchableOpacity 
@@ -36,7 +37,7 @@ const Header = () => {
             style = {{flexDirection: 'row', alignItems: 'center'}}
         >
             <Text style = {styles.headerText}>
-                [username here]
+                {user?.displayName}
             </Text>
             <Image source = {require('../../assets/down-triangle.png')} style = {{width: 12, height: 12, marginLeft: 7}}/>
         </TouchableOpacity>

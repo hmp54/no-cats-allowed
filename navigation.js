@@ -8,6 +8,9 @@ import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
 import ProfileScreen from './screens/ProfileScreen'
 
+import BottomTabs from './components/home/BottomTabs'
+import { BOTTOM_TAB_ICONS } from './components/home/BottomTabs'
+
 {/* This code creates a stack of different screens, like the HomeScreen and New Post Screen, and allows us to pass all of them through our App.js as one piece (hence the name Stack) 
 
 We have a stack of navigation pages for when you are signed into the app, and another stack of pages for when you're not signed in. 
@@ -28,6 +31,7 @@ export const SignedInStack = () =>(
             <Stack.Screen name = 'NewPostScreen' component = {NewPostScreen}/>
             <Stack.Screen name = 'ProfileScreen' component = {ProfileScreen}/>
         </Stack.Navigator>
+        <BottomTabs icons = {BOTTOM_TAB_ICONS}/>
     </NavigationContainer>
 )
 

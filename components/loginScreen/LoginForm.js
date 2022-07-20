@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { firebase, db } from '../../firebase'
+import { firebase, auth } from '../../firebase'
 
 
 const LoginForm = ({navigation}) => {
@@ -16,12 +16,10 @@ const LoginForm = ({navigation}) => {
             .min(8, 'Your password has to be at least 8 characters')
     })
 
-    const auth = getAuth(firebase);
     const onLogin = async (email, password) =>{
         await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user
-            Alert.alert('Firebase login successful', email, password)
         }).catch((error) =>{
             Alert.alert(error.message)
         });

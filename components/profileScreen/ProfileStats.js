@@ -2,13 +2,14 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button, withTheme } from 'react-native-elements';
+import {auth} from '../../firebase'
 
-const placeholder = '../../assets/profilePlaceholder.png'; 
+const defaultDP = 'https://i.postimg.cc/TYw46wW6/profile-Placeholder.png'; 
 
 const ProfileStats = () => {
   return (
     <View style = {styles.container}>
-        <Image source = {require(placeholder)} style = {styles.profilePhoto}/>
+        <Image source = {{uri: defaultDP}} style = {styles.profilePhoto}/>
         <View>
             <View style = {styles.statsContainer}>
                 <TouchableOpacity style = {styles.stats}>

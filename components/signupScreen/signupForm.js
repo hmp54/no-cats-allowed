@@ -2,8 +2,8 @@ import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity, Alert }
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
-import { firebase, db } from '../../firebase'
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { db, auth } from '../../firebase'
 import {collection, addDoc} from 'firebase/firestore'
 
 const SignupForm = ({navigation}) => {
@@ -17,8 +17,7 @@ const SignupForm = ({navigation}) => {
         return '../../assets/profile-photos/profilePlaceholder.png'
     }
 
-    const onSignUp = async (email, username, password) => {
-        const auth = getAuth(); 
+    const onSignUp = async (email, username, password) => { 
         const authUser = await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 //signed in
