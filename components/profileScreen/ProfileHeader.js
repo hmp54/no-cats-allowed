@@ -1,5 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, ActionSheetIOS, Alert } from 'react-native'
 import React from 'react'
+import {getAuth, signOut} from 'firebase/auth'
+
 
 const ProfileHeader = () => {
   return (
@@ -9,14 +11,40 @@ const ProfileHeader = () => {
   )
 }
 
-const Header = () => (
+
+const Header = () => {
+    return(
     <View style = {styles.headerContainer}>
-        <Text style = {styles.headerText}>[Your Username here]</Text>
+        <TouchableOpacity 
+            onPress = {() =>
+                ActionSheetIOS.showActionSheetWithOptions(
+                    {
+                        options: ["Cancel", "Sign Out"],
+                        destructiveButtonIndex: 1, 
+                        cancelButtonIndex: 0,
+                    },
+                    (buttonIndex) => {
+                        if(buttonIndex === 1){
+                            signOut(auth).then(() =>{
+                                Alert.alert('Sign out successful')
+                            }).catch((error) => {
+                                Alert.alert(error.message)
+                            })
+                        }
+                    })
+            } 
+            style = {{flexDirection: 'row', alignItems: 'center'}}
+        >
+            <Text style = {styles.headerText}>
+                [username here]
+            </Text>
+            <Image source = {require('../../assets/down-triangle.png')} style = {{width: 12, height: 12, marginLeft: 7}}/>
+        </TouchableOpacity>
         <TouchableOpacity>
             <Image source = {require('../../assets/option.png')} style = {{width: 25, height: 25}}/>
         </TouchableOpacity>
-    </View>
-)
+    </View>)
+}
 
 
 const styles = StyleSheet.create({

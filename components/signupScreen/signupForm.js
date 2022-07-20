@@ -2,7 +2,7 @@ import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity, Alert }
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { firebase, db } from '../../firebase'
 import {collection, addDoc} from 'firebase/firestore'
 
@@ -24,6 +24,8 @@ const SignupForm = ({navigation}) => {
                 //signed in
                 const user = userCredential.user; 
                 console.log("🔥 Created account", email, username, password);
+
+                updateProfile(auth.currentUser, {displayName: username})
 
                 //when user signs up, add thir username to 'users' collection on firestore
                 const colRef = collection(db, 'users')

@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Divider } from 'react-native-elements';
 
 const Bio = () => {
   return (
@@ -19,7 +20,9 @@ const styles = StyleSheet.create({
     },
     bio: {
         color: 'white',
-        fontSize: 16
+        fontSize: 16,
+        marginBottom: 20
     },
+
 })
 export default Bio
