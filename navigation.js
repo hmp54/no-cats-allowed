@@ -7,9 +7,11 @@ import NewPostScreen from './screens/NewPostScreen'
 import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import BottomTabs from './components/home/BottomTabs'
-import { BOTTOM_TAB_ICONS } from './components/home/BottomTabs'
+
+/*import BottomTabs from './components/home/BottomTabs'
+import { BOTTOM_TAB_ICONS } from './components/home/BottomTabs'*/ 
 
 {/* This code creates a stack of different screens, like the HomeScreen and New Post Screen, and allows us to pass all of them through our App.js as one piece (hence the name Stack) 
 
@@ -24,14 +26,14 @@ const screenOptions = {
 export const SignedInStack = () =>( 
     <NavigationContainer>
         <Stack.Navigator 
-            initialRouteName = 'ProfileScreen' 
+            initialRouteName = 'HomeScreen' 
             screenOptions = {screenOptions}
         >
             <Stack.Screen name = 'HomeScreen' component={HomeScreen}/>
             <Stack.Screen name = 'NewPostScreen' component = {NewPostScreen}/>
             <Stack.Screen name = 'ProfileScreen' component = {ProfileScreen}/>
         </Stack.Navigator>
-        <BottomTabs icons = {BOTTOM_TAB_ICONS}/>
+        {/*<BottomTabs icons = {BOTTOM_TAB_ICONS}/>*/}
     </NavigationContainer>
 )
 

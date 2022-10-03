@@ -5,28 +5,28 @@ import {Divider } from 'react-native-elements'
 
 const BOTTOM_TAB_ICONS = [
     {
-        name: 'Home',
+        name: 'HomeScreen',
         active: require('../../assets/home-active.png'),
         inactive: require('../../assets/home.png') 
     },
     {
-        name: 'Search',
+        name: 'SearchScreen',
         active: require('../../assets/search-active.png'),
         inactive: require('../../assets/search.png') 
     },
     {
-        name: 'Profile',
+        name: 'ProfileScreen',
         active: require('../../assets/user-active.png'),
         inactive: require('../../assets/user.png')
     },
 ]
 
 const BottomTabs = ({ icons }) => {
-    const [activeTab, setActiveTab]  = useState('Home')
+    const [activeTab, setActiveTab]  = useState('HomeScreen')
 
     const Icon = ({icon}) => (
         <TouchableOpacity onPress = {() => setActiveTab(icon.name)}>
-            <Image source = {icon.inactive} style= {styles.icon}/>
+            <Image source = {icon.active} style= {styles.icon}/>
         </TouchableOpacity>
     )
 
