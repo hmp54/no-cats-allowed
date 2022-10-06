@@ -23,6 +23,17 @@ const screenOptions = {
     headerShown: false,  
 }
 
+const BottomTabs = () => {
+    const Tab = createBottomTabNavigator(); 
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+      </Tab.Navigator>
+    );
+  }
+
+
 export const SignedInStack = () =>( 
     <NavigationContainer>
         <Stack.Navigator 
@@ -33,6 +44,7 @@ export const SignedInStack = () =>(
             <Stack.Screen name = 'NewPostScreen' component = {NewPostScreen}/>
             <Stack.Screen name = 'ProfileScreen' component = {ProfileScreen}/>
         </Stack.Navigator>
+        <BottomTabs/>
         {/*<BottomTabs icons = {BOTTOM_TAB_ICONS}/>*/}
     </NavigationContainer>
 )
