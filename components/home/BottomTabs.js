@@ -21,10 +21,10 @@ const BOTTOM_TAB_ICONS = [
     },
 ]
 
-const BottomTabs = ({ icons }) => {
-    const [activeTab, setActiveTab]  = useState('HomeScreen')
+const BottomTabs = ({ icons, navigation }) => {
+    const [activeTab, setActiveTab] = useState('HomeScreen')
 
-    const Icon = ({icon}) => (
+    const Icon = ({icon, navigation}) => (
         <TouchableOpacity onPress = {() => setActiveTab(icon.name)}>
             <Image source = {icon.active} style= {styles.icon}/>
         </TouchableOpacity>
