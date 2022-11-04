@@ -8,15 +8,8 @@ import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import {Divider} from 'react-native-elements'
-
-
-/*import BottomTabs from './components/home/BottomTabs'*/ 
-
-{/* This code creates a stack of different screens, like the HomeScreen and New Post Screen, and allows us to pass all of them through our App.js as one piece (hence the name Stack) 
-
-We have a stack of navigation pages for when you are signed into the app, and another stack of pages for when you're not signed in. 
-*/}
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {HomeStack} from './HomeStack';
 
 const BOTTOM_TAB_ICONS = [
     {
@@ -36,60 +29,37 @@ const BOTTOM_TAB_ICONS = [
     },
 ]
 
-const Stack = createStackNavigator()
+
+const Tab = createBottomTabNavigator(); 
+const Stack = createStackNavigator();
+
 const screenOptions = {
     headerShown: false,  
 }
 
-const BottomTabs = ({icons}) => {
-    const [activeTab, setActiveTab] = useState('HomeScreen')
-
-    const Icon = ({icon}) => (
-        <TouchableOpacity onPress = {() => setActiveTab(icon.name)}>
-            <Image source = {icon.active} style= {styles.icon}/>
-        </TouchableOpacity>
-    )
-
-    return (
-        <View style = {styles.wrapper}>
-            <Divider width = {1} orientation = 'vertical'/>
-            <View style = {styles.iconContainer}>
-                <TouchableOpacity>
-                    <Image
-                        source = {BOTTOM_TAB_ICONS[0].inactive}
-                        style = {styles.icon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image
-                        source = {BOTTOM_TAB_ICONS[1].inactive}
-                        style = {styles.icon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image
-                        source = {BOTTOM_TAB_ICONS[2].inactive}
-                        style = {styles.icon}
-                    />
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
 
 export const SignedInStack = () =>( 
     <NavigationContainer>
-        <Stack.Navigator 
-            initialRouteName = 'HomeScreen' 
-            screenOptions = {screenOptions}
+        <Tab.Navigator 
+            initialRouteName='HomeScreen'
+            screenOptions={({route}) => ({
+                headerShown: false,
+                tabBarActiveBackgroundColor: 'black',
+                tabBarInactiveBackgroundColor: 'black',
+                tabBarStyle: {
+                    paddingBottom: 0,
+                },
+                tabBarShowLabel: false
+            })}
         >
-            <Stack.Screen name = 'HomeScreen' component={HomeScreen}/>
-            <Stack.Screen name = 'NewPostScreen' component = {NewPostScreen}/>
-            <Stack.Screen name = 'ProfileScreen' component = {ProfileScreen}/>
-        </Stack.Navigator>
-        <BottomTabs/>
+            <Tab.Screen 
+                name = 'HomeStack' 
+                component={HomeStack} 
+            />
+            <Tab.Screen name = 'ProfileScreen' component = {ProfileScreen}/>
+        </Tab.Navigator>        
     </NavigationContainer>
-)
+) 
 
 export const SignedOutStack = () => (
     <NavigationContainer>
